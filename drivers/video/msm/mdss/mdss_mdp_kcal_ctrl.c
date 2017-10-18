@@ -3,6 +3,7 @@
  * Copyright (c) 2013, LGE Inc. All rights reserved
  * Copyright (c) 2014 savoca <adeddo27@gmail.com>
  * Copyright (c) 2014 Paul Reioux <reioux@gmail.com>
+ * Copyright (c) 2017 Alfredo Martínez <alfredomartinez1423@gmail.com>
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -23,7 +24,13 @@
 
 #include "mdss_mdp.h"
 
+#if defined(CONFIG_GHOST_SCREEN)
+#define DEF_R B4
+#define DEF_G B4
+#define DEF_B AA
+#else
 #define DEF_PCC 0x100
+#endif
 #define DEF_PA 0xff
 #define PCC_ADJ 0x80
 
@@ -405,9 +412,15 @@ static int kcal_ctrl_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, lut_data);
 
 	lut_data->enable = 0x1;
+#if defined(CONFIG_GHOST_SCREEN)
+	lut_data->red = DEF_R;
+	lut_data->green = DEF_G;
+	lut_data->blue = DEF_B;
+#else
 	lut_data->red = DEF_PCC;
 	lut_data->green = DEF_PCC;
 	lut_data->blue = DEF_PCC;
+#endif
 	lut_data->minimum = 0x23;
 	lut_data->invert = 0x0;
 	lut_data->hue = 0x0;
