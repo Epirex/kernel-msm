@@ -24,13 +24,9 @@
 
 #include "mdss_mdp.h"
 
-#if defined(CONFIG_GHOST_SCREEN)
 #define DEF_R B4
 #define DEF_G B4
 #define DEF_B AA
-#else
-#define DEF_PCC 0x100
-#endif
 #define DEF_PA 0xff
 #define PCC_ADJ 0x80
 
@@ -207,7 +203,7 @@ static ssize_t kcal_min_store(struct device *dev,
 	struct kcal_lut_data *lut_data = dev_get_drvdata(dev);
 
 	r = kstrtoint(buf, 10, &kcal_min);
-	if ((r) || (kcal_min < 1 || kcal_min > 256))
+	if ((r) || (kcal_min < 1 || kcal_min > 170))
 		return -EINVAL;
 
 	lut_data->minimum = kcal_min;
@@ -412,15 +408,9 @@ static int kcal_ctrl_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, lut_data);
 
 	lut_data->enable = 0x1;
-#if defined(CONFIG_GHOST_SCREEN)
 	lut_data->red = DEF_R;
 	lut_data->green = DEF_G;
 	lut_data->blue = DEF_B;
-#else
-	lut_data->red = DEF_PCC;
-	lut_data->green = DEF_PCC;
-	lut_data->blue = DEF_PCC;
-#endif
 	lut_data->minimum = 0x23;
 	lut_data->invert = 0x0;
 	lut_data->hue = 0x0;
