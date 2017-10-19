@@ -24,9 +24,9 @@
 
 #include "mdss_mdp.h"
 
-#define DEF_R B4
-#define DEF_G B4
-#define DEF_B AA
+#define DEF_R 0xb4
+#define DEF_G 0xb4
+#define DEF_B 0xaa
 #define DEF_PA 0xff
 #define PCC_ADJ 0x80
 
