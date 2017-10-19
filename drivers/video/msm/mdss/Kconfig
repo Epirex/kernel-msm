@@ -70,10 +70,3 @@ config FB_MSM_MDSS_KCAL_CTRL
 	---help---
 	  Enable sysfs for rgb/lut control for mdss-mdp display controllers
 	  in the MDSS sub-system.
-
-config CONFIG_GHOST_SCREEN
-	depends on FB_MSM_MDSS_KCAL_CTRL
-	bool "Ghost screen fix"
-	default n
-	---help---
-	  Enable this config to fix ghost screen in some devices.

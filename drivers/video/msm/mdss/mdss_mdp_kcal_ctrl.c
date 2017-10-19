@@ -203,7 +203,7 @@ static ssize_t kcal_min_store(struct device *dev,
 	struct kcal_lut_data *lut_data = dev_get_drvdata(dev);
 
 	r = kstrtoint(buf, 10, &kcal_min);
-	if ((r) || (kcal_min < 1 || kcal_min > 170))
+	if ((r) || (kcal_min < 1 || kcal_min > 256))
 		return -EINVAL;
 
 	lut_data->minimum = kcal_min;
